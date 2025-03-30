@@ -2,11 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.*;
+
 import java.util.Scanner;
 
 public class WordCounter{
-
-    public static int processText(StringBuffer text, String stopWord){
+    public static int processText(StringBuffer text, String stopWord) throws TooSmallText, InvalidStopwordException {
 
         Pattern pattern = Pattern.compile("[a-zA-Z0-9']");
         Matcher matcher = pattern.matcher(text);
@@ -14,12 +14,13 @@ public class WordCounter{
         int totalCount = 0;
         int stopCount = 0;
         boolean found = false;
+
         while(matcher.find()){
             totalCount++;
             if(!found){
                 stopCount++;
             }
-            if(stopWord != null && matcher.equals(stopWord)){
+            if(stopWord != null && matcher.group().equals(stopWord)){
                 found = true;
             }
             
@@ -40,7 +41,7 @@ public class WordCounter{
         return stopCount;
     }
 
-    public static String processFile(String path){
+    public static StringBuffer processFile(String path) throws EmptyFileException {
 
         Scanner input = new Scanner(System.in);
         File file = new File(path);
@@ -71,7 +72,8 @@ public class WordCounter{
         StringBuffer text = new StringBuffer();
         String stopWord = null;
 
-        while(!input.equals(1) && !input.equals(2)){
+        String option = "";
+        while(!option.equals("1") && !option.equals("2")){
             System.out.println("Enter 1 or 2");
         }
 
@@ -79,7 +81,7 @@ public class WordCounter{
             stopWord = args[1];
         }
 
-        if(input.equals(1)){
+        if(option.equals("1")){
             try {
                 text = processFile(stopWord);
             } catch (EmptyFileException e) {
