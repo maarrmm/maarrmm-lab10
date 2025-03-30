@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.regex.*;
+import java.util.Scanner;
 
 public class WordCounter{
 
@@ -31,10 +32,13 @@ public class WordCounter{
         }
     }
 
+    public static String processFile(String path){
+
+        Scanner fileScanner = null;
+        File file = new File(path);
 
 
-
-
+    }
 
 
 
