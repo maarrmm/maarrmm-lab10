@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class WordCounter{
     public static int processText(StringBuffer text, String stopWord) throws TooSmallText, InvalidStopwordException {
 
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9']");
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9']+");
         Matcher matcher = pattern.matcher(text);
 
         int totalCount = 0;
@@ -63,6 +63,10 @@ public class WordCounter{
         } catch (FileNotFoundException e){
             System.out.println("could not open");
         }
+
+        if (sb.toString().length() == 0) {
+            throw new EmptyFileException(path + " was empty");
+        }
         
         return sb;
     }
@@ -75,6 +79,7 @@ public class WordCounter{
         String option = "";
         while(!option.equals("1") && !option.equals("2")){
             System.out.println("Enter 1 or 2");
+            option = input.nextLine();
         }
 
         if(args.length > 1){
@@ -83,10 +88,27 @@ public class WordCounter{
 
         if(option.equals("1")){
             try {
-                text = processFile(stopWord);
+                text = processFile(args[0]);
             } catch (EmptyFileException e) {
                 System.out.println(e);
                 text = new StringBuffer("");
+            }
+        } else {
+            text = new StringBuffer(args[0]);
+        }
+
+        while(true){
+            try {
+                int count = processText(text, stopWord);
+                System.out.println("Found " + count + " words.");
+                break;
+            } catch (InvalidStopwordException e){
+                System.out.println(e);
+                System.out.println("Enter new stopword:");
+                stopWord = input.nextLine();
+            } catch (TooSmallText e){
+                System.out.println(e);
+                break;
             }
         }
     }

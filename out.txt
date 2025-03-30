@@ -1,0 +1,9 @@
+Enter 1 or 2
+Found 5 words.
+Enter 1 or 2
+Found 9 words.
+Enter 1 or 2
+EmptyFileException: EmptyFileException: file1.txt was empty
+TooSmallText: TooSmallText: Only Found 0 words.
+Enter 1 or 2
+TooSmallText: TooSmallText: Only Found 2 words.
