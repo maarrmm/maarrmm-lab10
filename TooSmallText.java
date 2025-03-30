@@ -1,5 +1,10 @@
 public class TooSmallText extends Exception {
-    public TooSmallText(String text) {
-        super("TooSmallText: " + text);
+    public TooSmallText(String message) {
+        super(message);
+    }
+
+    @Override
+    public String toString() {
+        return "TooSmallText: " + getMessage();
     }
 }

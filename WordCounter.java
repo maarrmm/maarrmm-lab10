@@ -3,8 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.*;
 
-import java.util.Scanner;
-
 public class WordCounter{
     public static int processText(StringBuffer text, String stopWord) throws TooSmallText, InvalidStopwordException {
 
@@ -27,7 +25,7 @@ public class WordCounter{
         }
         
         if(totalCount < 5){
-            throw new TooSmallText("Only Found " + totalCount + " words.");
+            throw new TooSmallText("Only found " + totalCount + " words.");
         }
 
         if(stopWord == null){
@@ -57,7 +55,7 @@ public class WordCounter{
         try{
             Scanner fileScanner = new Scanner(file);
             while(fileScanner.hasNextLine()){
-                sb.append(fileScanner.nextLine()).append(" ");
+                sb.append(fileScanner.nextLine());
             }
             fileScanner.close();
         } catch (FileNotFoundException e){
@@ -112,8 +110,4 @@ public class WordCounter{
             }
         }
     }
-
-
-
 }
-
